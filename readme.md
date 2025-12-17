@@ -5,3 +5,4 @@ Making an etch a sketch
 3. Added the function to click and hover over the grid to draw on it
 4. Added Reset button to clean the drawing
 5. Added function to change the size of grid
+6. Added button to toggle on and off RGB function

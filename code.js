@@ -21,8 +21,31 @@ document.body.addEventListener("mousedown", () => mouseDown = true);
 document.body.addEventListener("mouseup", () => mouseDown = false);
 
 function paintSquare(e) {
-    if (e.type === "mousedown" || mouseDown) {
-        this.style.backgroundColor = "black";
+
+    if (rgbMode){
+         if (e.type === "mousedown" || mouseDown) {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+
+            this.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        }       
+    } else if (opaqueMode){
+        if (e.type === "mousedown" || mouseDown) {
+            if (!this.style.backgroundColor) {
+                this.style.backgroundColor = "black";
+            }
+
+            let currentOpacity = parseFloat(this.style.opacity) || 0.1;
+
+            if (currentOpacity < 1) {
+                this.style.opacity = currentOpacity + 0.1;
+            }
+    }
+    } else {
+        if (e.type === "mousedown" || mouseDown) {
+            this.style.backgroundColor = "black";
+        }
     }
 }
 
@@ -33,7 +56,8 @@ function resetGrid(){
     const squares = document.querySelectorAll(".square")
 
     squares.forEach(square => {
-        square.style.backgroundColor = "white";
+        square.style.backgroundColor = "white"
+        square.style.opacity = 1
     });
 }
 
@@ -56,9 +80,31 @@ function changeGrid() {
         alert("Please enter a valid number between 1 and 100");
         return;
     }
-    
+
     grid.innerHTML = "";
     userInput.value = ""
 
     createGrid(size)
 }
+
+let rgbMode = false
+
+const rgbBtn = document.querySelector(".rgb")
+rgbBtn.firstElementChild.style.backgroundColor = "red"
+
+rgbBtn.addEventListener("click", function(){
+    rgbMode = !rgbMode
+    if (rgbMode){
+        rgbBtn.firstElementChild.style.backgroundColor = "green"
+    } else {
+        rgbBtn.firstElementChild.style.backgroundColor = "red"
+    }
+})
+
+let opaqueMode = false
+
+const opaqueBtn = document.querySelector(".opacity")
+
+opaqueBtn.addEventListener("click", function(){
+    opaqueMode = !opaqueMode
+})
