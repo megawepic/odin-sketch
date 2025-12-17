@@ -28,23 +28,25 @@ function paintSquare(e) {
             const g = Math.floor(Math.random() * 256);
             const b = Math.floor(Math.random() * 256);
 
-            this.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            this.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
+            this.style.opacity = ""
         }       
     } else if (opaqueMode){
         if (e.type === "mousedown" || mouseDown) {
-            if (!this.style.backgroundColor) {
-                this.style.backgroundColor = "black";
+            if (!this.style.backgroundColor || this.style.backgroundColor == "white") {
+                this.style.backgroundColor = "black"
             }
 
-            let currentOpacity = parseFloat(this.style.opacity) || 0.1;
+            let currentOpacity = parseFloat(this.style.opacity) || 0.1
 
             if (currentOpacity < 1) {
-                this.style.opacity = currentOpacity + 0.1;
+                this.style.opacity = currentOpacity + 0.1
             }
     }
     } else {
         if (e.type === "mousedown" || mouseDown) {
-            this.style.backgroundColor = "black";
+            this.style.backgroundColor = "black"
+            this.style.opacity = ""
         }
     }
 }
@@ -57,7 +59,7 @@ function resetGrid(){
 
     squares.forEach(square => {
         square.style.backgroundColor = "white"
-        square.style.opacity = 1
+        square.style.opacity = ""
     });
 }
 
@@ -81,7 +83,7 @@ function changeGrid() {
         return;
     }
 
-    grid.innerHTML = "";
+    grid.innerHTML = ""
     userInput.value = ""
 
     createGrid(size)
@@ -104,7 +106,12 @@ rgbBtn.addEventListener("click", function(){
 let opaqueMode = false
 
 const opaqueBtn = document.querySelector(".opacity")
-
+opaqueBtn.firstElementChild.style.backgroundColor = "red"
 opaqueBtn.addEventListener("click", function(){
     opaqueMode = !opaqueMode
+    if (opaqueMode){
+        opaqueBtn.firstElementChild.style.backgroundColor = "green"
+    } else {
+        opaqueBtn.firstElementChild.style.backgroundColor = "red"
+    }    
 })

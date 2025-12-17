@@ -6,3 +6,4 @@ Making an etch a sketch
 4. Added Reset button to clean the drawing
 5. Added function to change the size of grid
 6. Added button to toggle on and off RGB function
+7. Added button to toggle on and off opacity mode
