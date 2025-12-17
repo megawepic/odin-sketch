@@ -50,14 +50,14 @@ input.addEventListener("keydown", function(e) {
 function changeGrid() {
     const userInput = document.getElementById("userInput")
     
-    grid.innerHTML = "";
     const size = parseInt(userInput.value)
 
     if (isNaN(size) || size < 1 || size > 100) {
         alert("Please enter a valid number between 1 and 100");
         return;
     }
-
+    
+    grid.innerHTML = "";
     userInput.value = ""
 
     createGrid(size)
