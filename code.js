@@ -40,15 +40,25 @@ function resetGrid(){
 const change = document.querySelector(".change-grid")
 change.addEventListener("click", changeGrid)
 
-function changeGrid() {
-    const userInput = parseInt(document.getElementById("userInput").value)
+const input = document.querySelector("#userInput")
+input.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        changeGrid();
+    }
+})
 
-    if (isNaN(userInput) || userInput < 1 || userInput > 100) {
+function changeGrid() {
+    const userInput = document.getElementById("userInput")
+    
+    grid.innerHTML = "";
+    const size = parseInt(userInput.value)
+
+    if (isNaN(size) || size < 1 || size > 100) {
         alert("Please enter a valid number between 1 and 100");
         return;
     }
-    
-    grid.innerHTML = "";
-    
-    createGrid(userInput)
+
+    userInput.value = ""
+
+    createGrid(size)
 }
